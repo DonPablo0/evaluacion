@@ -2,9 +2,17 @@ const encuesta = require('../modelo/encuesta')
 
 const getEncuestas = async (req, res) => {
     const encuestas = await encuesta.find()
+    let edad, pro = 0;
+    for (let index = 0; index < encuestas.length; index++) {
+        let persona = encuestas[index];
+        edad += persona.edad;
+        pro++
+    }
+    edad = edad / pro;
     res.json({
         msg: 'get api encuesta',
-        encuestas
+        encuestas,
+        msg: `el promedio de las edades es de ${edad}`
     })
 }
 
